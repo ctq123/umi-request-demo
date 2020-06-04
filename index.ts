@@ -1,4 +1,4 @@
-import Service from './umi-request'
+import Service from './umiRequest'
 
 export { Service }
 
