@@ -1,4 +1,4 @@
-import DuService from './umi-request/interface'
+import DuService from './umiRequest/interface'
 
 type DuCore = {
   Service: DuService
