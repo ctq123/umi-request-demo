@@ -1,7 +1,7 @@
-import UmiRequest from './umi-request'
+import Service from './umi-request'
 
-export { UmiRequest }
+export { Service }
 
 export default {
-  UmiRequest
+  Service
 }

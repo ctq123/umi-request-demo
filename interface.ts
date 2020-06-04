@@ -1,5 +1,9 @@
-import ServiceExport from './umi-request/interface'
+import DuService from './umi-request/interface'
 
-declare const RequestExport: ServiceExport
+type DuCore = {
+  Service: DuService
+}
 
-export default RequestExport
+export declare const Service: DuService
+
+export default DuCore
