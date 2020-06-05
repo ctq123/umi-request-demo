@@ -27,7 +27,7 @@ interface DuConfig {
  * @template T
  */
 export interface SingleHttpOptions extends RequestOptionsInit {
-  url?: string
+  url: string
   noSign?: boolean
   showSuccessTips: boolean
   msg?: string

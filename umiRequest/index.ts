@@ -11,12 +11,12 @@ import createExtendRequestInstance from './extendRequest'
 
 export default (function() {
   let globalHttpOption: GlobalHttpOptions = {}
-  let extendInstance: RequestMethod | null = null
+  let umiInstance: RequestMethod | null = null
 
   function startFetch<T, R>(options: SingleHttpOptions) {
 
     return new Promise<RequestResponse<R>>((resolve, reject) => {
-      if (!extendInstance) {
+      if (!umiInstance) {
         return reject(new Error('请先进行实例化操作requestInit'))
       }
 
@@ -26,7 +26,7 @@ export default (function() {
       }
 
       // 传递含有自定义属性的newOptions进去，在拦截器中会删除自定义属性，只保留umi-request原生属性
-      return extendInstance[options.method](options.url, newOptions)
+      return umiInstance[options.method](options.url, newOptions)
       .then((resp: RequestResponse<R>) => {
         if (
           globalHttpOption.du &&
@@ -55,11 +55,11 @@ export default (function() {
 
   return {
     requestInit(options: GlobalHttpOptions): RequestMethod {
-      if (!extendInstance) extendInstance = createExtendRequestInstance(options)
+      if (!umiInstance) umiInstance = createExtendRequestInstance(options)
       if (options) globalHttpOption = options
 
-      // 这里返回与否意义不大，request内部会直接使用extendInstance实例
-      return extendInstance
+      // 这里返回与否意义不大，request内部会直接使用umiInstance实例
+      return umiInstance
     },
     request<T = any, R = any>(
       options: SingleHttpOptions
