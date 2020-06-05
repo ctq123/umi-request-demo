@@ -32,11 +32,10 @@ export default (function() {
           globalHttpOption.du &&
           typeof globalHttpOption.du.successCallback === 'function'
         ) {
-          globalHttpOption.du.successCallback(null, options)
+          globalHttpOption.du.successCallback(resp, options)
         }
         resolve(resp)
       }).catch((error: ResponseError) => {
-        console.log("error>>>", error)
         // 兼容处理（errorHandler和globalHttpOption.du.errorCallback）,防止重复进行错误处理
         // globalHttpOption.errorHandler优先级高于globalHttpOption.du.errorCallback
         if (
@@ -45,7 +44,6 @@ export default (function() {
           typeof globalHttpOption.du.errorCallback === 'function'
         ) {
           globalHttpOption.du.errorCallback(
-            null,
             options,
             error
           )

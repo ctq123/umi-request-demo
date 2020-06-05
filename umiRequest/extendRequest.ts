@@ -29,7 +29,7 @@ function setSignBeforeRequest(config: RequestConfig): RequestConfig {
  */
 function filterInvalidParamsBeforeRequest(config: RequestConfig): RequestConfig {
   const { url, options } = config
-  const { du } = options
+  const { du, data, params } = options
   // 是否需要过滤无效属性值
   if (options.filterInvalidParams === true || 
     (options.filterInvalidParams !== false && du && du.filterInvalidParams)
@@ -40,9 +40,11 @@ function filterInvalidParamsBeforeRequest(config: RequestConfig): RequestConfig 
       invalidParams = options.invalidParams
     }
     // 默认过滤['', undefined, null]
-    if (options.method === 'post') {
+    const dataType = Object.prototype.toString.call(data)
+    const paramsType = Object.prototype.toString.call(params)
+    if (dataType === '[object Object]') {
       filterInvalidProperty(options.data, invalidParams)
-    } else {
+    } else if (paramsType === '[object Object]') {
       filterInvalidProperty(options.params, invalidParams)
     }
   }

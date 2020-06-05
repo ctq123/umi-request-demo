@@ -12,7 +12,6 @@ interface DuConfig {
   filterInvalidParams: boolean,
   successCallback?: (any: any, DuHttpOptions: SingleHttpOptions) => void
   errorCallback?: (
-    err: string,
     options: SingleHttpOptions,
     ResponseError: ResponseError
   ) => void
@@ -28,7 +27,7 @@ interface DuConfig {
  * @template T
  */
 export interface SingleHttpOptions extends RequestOptionsInit {
-  url: string
+  url?: string
   noSign?: boolean
   showSuccessTips: boolean
   msg?: string

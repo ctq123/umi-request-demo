@@ -5,11 +5,16 @@
   },
   "name": "umi-request-demo",
   "description": "umi-request封装",
-  "version": "1.0.3",
-  "main": "index.ts",
-  "typings": "interface.ts",
-  "devDependencies": {},
+  "version": "1.0.10",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

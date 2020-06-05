@@ -1,4 +1,4 @@
-import md5 from 'md5'
+import * as md5 from 'md5'
 
 import { RequestConfig } from './interface'
 
@@ -62,15 +62,17 @@ function addSign(
   secretKey: string
 ): RequestConfig {
   const { options } = config
-  const { data, params, du } = options
+  const { data, params={}, du, method } = options
+  const dataType = Object.prototype.toString.call(data)
+  const paramsType = Object.prototype.toString.call(params)
   // 优先获取自定义生成sign函数
   const generateSign = du && du.generateSign ? du.generateSign : parseToken
-  const sign = options.method === 'post'
-    ? generateSign(data, secretKey)
-    : generateSign(params, secretKey)
-  if (options.method === 'post') {
+  
+  if (dataType === '[object Object]') {
+    const sign = generateSign(data, secretKey)
     config.url += `?sign=${sign}`
-  } else {
+  } else if (paramsType === '[object Object]') {
+    const sign = generateSign(params, secretKey)
     config.options.params['sign'] = sign
   }
 
